@@ -11,6 +11,8 @@
     "gridsome": "^0.7.0"
   },
   "devDependencies": {
-    "imagemin-webp-webpack-plugin": "^3.3.2"
+    "imagemin-webp-webpack-plugin": "^3.3.2",
+    "node-sass": "^4.14.1",
+    "sass-loader": "^10.0.4"
   }
 }
