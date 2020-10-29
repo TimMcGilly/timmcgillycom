@@ -1,9 +1,16 @@
 <template>
   <div class="card projectCard">
     <h3>{{ Title }}</h3>
+    <div class="cardBody">
     <p class="projectDescription">{{ ShortDescription }}</p>
     <button id="learnButton">Learn More</button>
-    <hr/>
+    </div>
+    <hr />
+    <div class="tagSection">
+      <button class="tag" v-for="tag in Tags" :key="tag.id">
+        {{ tag.Name }}
+      </button>
+    </div>
   </div>
 </template>
 
@@ -13,7 +20,7 @@ export default {
     return {};
   },
   methods: {},
-  props: ["Title", "ShortDescription"],
+  props: ["Title", "ShortDescription", "Tags"],
 };
 </script>
 
@@ -28,10 +35,21 @@ h3 {
   margin: 10px;
   padding: 5px 25px 5px 25px;
   background-color: white;
+  display: flex;
+  flex-direction: column;
 }
 
 .projectDescription {
   font-size: 21px;
+  margin-bottom: 10px;
+}
+
+.cardBody {
+  flex-grow: 1;
+}
+
+hr {
+  margin: 0px;
 }
 
 #learnButton {
@@ -44,10 +62,22 @@ h3 {
   font-weight: 600;
   font-size: 19px;
   outline: none;
+  width: max-content;
 }
 
 #learnButton:hover {
   background-color: #ebebeb;
   cursor: pointer;
+}
+
+.tagSection {
+  margin: 10px 0px;
+}
+
+.tag {
+  background-color: Transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
 }
 </style>

@@ -22,8 +22,12 @@
 
     <section class="contactMe">
       <h2> Contact Me </h2>
-      <p class="centered contactText">Send me a email at <a class="contactText" href="mailto:timmcgilly@gmail.com"> timmcgilly@gmail.com</a></p>
+      <p class="contactText">Send me a email at <a class="contactText" href="mailto:timmcgilly@gmail.com"> timmcgilly@gmail.com</a></p>
     
+    </section>
+
+    <section>
+      <p class="centered"> Copyright &copy; {{new Date().getFullYear()}} Tim McGilly </p>
     </section>
   </Layout>
 </template>
@@ -48,6 +52,9 @@ query {
         id
         Title
         ShortDescription
+        tags{
+          Name
+        }
       }
     }
   }
