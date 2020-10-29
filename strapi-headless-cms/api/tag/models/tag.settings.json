@@ -13,8 +13,11 @@
       "type": "string"
     },
     "projects": {
-      "via": "tags",
-      "collection": "project"
+      "collection": "project",
+      "via": "tags"
+    },
+    "FilterTag": {
+      "type": "boolean"
     }
   }
 }

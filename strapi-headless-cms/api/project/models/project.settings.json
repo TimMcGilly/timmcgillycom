@@ -16,8 +16,8 @@
       "type": "richtext"
     },
     "tags": {
-      "collection": "tag",
       "via": "projects",
+      "collection": "tag",
       "dominant": true
     },
     "ShortDescription": {

@@ -11,6 +11,23 @@
     <section class="projects">
       <a id="projects" class="anchor"></a>
       <h2 class="SectionHeading">Projects</h2>
+      <button
+        class="filterButt"
+        :class="{ buttSelected: isSelected('All') }"
+        @click="updateSelected('All')"
+      >
+        All
+      </button>
+      <button
+        class="filterButt"
+        v-for="tag in $page.filteredTags.edges"
+        :key="tag.id"
+        :class="{ buttSelected: isSelected(tag.node.Name) }"
+        @click="updateSelected(tag.node.Name)"
+      >
+        {{ tag.node.Name }}
+      </button>
+
       <div class="cards projectsInner">
         <Project
           v-for="edge in $page.projects.edges"
@@ -21,13 +38,19 @@
     </section>
 
     <section class="contactMe">
-      <h2> Contact Me </h2>
-      <p class="contactText">Send me a email at <a class="contactText" href="mailto:timmcgilly@gmail.com"> timmcgilly@gmail.com</a></p>
-    
+      <h2>Contact Me</h2>
+      <p class="contactText">
+        Send me a email at
+        <a class="contactText" href="mailto:timmcgilly@gmail.com">
+          timmcgilly@gmail.com</a
+        >
+      </p>
     </section>
 
     <section>
-      <p class="centered"> Copyright &copy; {{new Date().getFullYear()}} Tim McGilly </p>
+      <p class="centered">
+        Copyright &copy; {{ new Date().getFullYear() }} Tim McGilly
+      </p>
     </section>
   </Layout>
 </template>
@@ -35,11 +58,24 @@
 <script>
 import Project from "~/components/Project.vue";
 export default {
+  data: function () {
+    return {
+      selectedFilter: "All",
+    };
+  },
   metaInfo: {
     title: "Hello, world!",
   },
   components: {
     Project,
+  },
+  methods: {
+    isSelected(filterName) {
+      return this.selectedFilter === filterName;
+    },
+    updateSelected(filterName) {
+      this.selectedFilter = filterName;
+    }
   },
 };
 </script>
@@ -53,10 +89,20 @@ query {
         Title
         ShortDescription
         tags{
+          id
           Name
         }
       }
     }
+  }
+  filteredTags: allStrapiTag(sortBy: "Name", order: ASC, filter: {FilterTag: {eq: true}}){
+ 		edges{
+      node{
+        id
+        Name
+        FilterTag
+      }
+    }   
   }
 }
 </page-query>
@@ -106,7 +152,30 @@ section {
 }
 
 .centered {
-  text-align: center 
+  text-align: center;
+}
+
+/*Filter Buttons */
+.filterButt {
+  background-color: #ffffff;
+  color: black;
+  border: none;
+  padding: 10px 15px;
+  margin: 10px;
+  font-family: "Source Sans Pro", sans-serif;
+  font-weight: 600;
+  font-size: 19px;
+  outline: none;
+  width: max-content;
+}
+
+.filterButt:hover {
+  background-color: #ebebeb;
+  cursor: pointer;
+}
+
+.buttSelected {
+  background-color: #d8d8d8;
 }
 
 /* Cards */
@@ -142,8 +211,8 @@ section > h2 {
   padding-bottom: 10px;
   margin: 0;
   padding-top: 35px;
+  display: inline-block;
 }
-
 
 /* Contact me */
 .contactMe {
@@ -153,5 +222,4 @@ section > h2 {
 .contactText {
   font-size: 25px;
 }
-
 </style>

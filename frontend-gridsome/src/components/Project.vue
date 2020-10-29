@@ -7,7 +7,7 @@
     </div>
     <hr />
     <div class="tagSection">
-      <button class="tag" v-for="tag in Tags" :key="tag.id">
+      <button class="tag" v-for="tag in tags" :key="tag.id">
         {{ tag.Name }}
       </button>
     </div>
@@ -20,7 +20,7 @@ export default {
     return {};
   },
   methods: {},
-  props: ["Title", "ShortDescription", "Tags"],
+  props: ["Title", "ShortDescription", "tags"],
 };
 </script>
 
