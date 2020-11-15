@@ -10,7 +10,35 @@ module.exports = function (api) {
     // Use the Data Store API here: https://gridsome.org/docs/data-store-api/
   })
 
-  api.createPages(({ createPage }) => {
+  api.createPages(async ({ graphql, createPage }) => {
     // Use the Pages API here: https://gridsome.org/docs/pages-api/
+    const { data } = await graphql(`
+      {
+        projects: allStrapiProject {
+          edges {
+            node {
+              id
+              Title
+              ShortDescription
+              tags{
+                id
+                Name
+              }
+              UrlSlug
+            }
+          }
+        }
+      }
+    `);
+    const projects = data.projects.edges;
+    projects.forEach(project => {
+      createPage({
+        path: `/projects/${project.node.UrlSlug}`,
+        component: './src/templates/Projects.vue',
+        context: {
+          id: project.node.id,
+        },
+      });
+    });
   })
 }

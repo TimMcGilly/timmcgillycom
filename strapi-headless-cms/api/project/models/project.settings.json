@@ -2,11 +2,13 @@
   "kind": "collectionType",
   "collectionName": "projects",
   "info": {
-    "name": "Project"
+    "name": "Project",
+    "description": ""
   },
   "options": {
     "increments": true,
-    "timestamps": true
+    "timestamps": true,
+    "draftAndPublish": false
   },
   "attributes": {
     "Title": {
@@ -16,12 +18,16 @@
       "type": "richtext"
     },
     "tags": {
-      "via": "projects",
       "collection": "tag",
+      "via": "projects",
       "dominant": true
     },
     "ShortDescription": {
       "type": "text"
+    },
+    "UrlSlug": {
+      "type": "uid",
+      "targetField": "Title"
     }
   }
 }
